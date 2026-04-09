@@ -1,0 +1,14 @@
+# macOS system files (Folder view settings, icon positions)
+.DS_Store
+.DS_Store?
+
+# Jupyter Notebook Checkpoints (Auto-generated backup folders)
+.ipynb_checkpoints/
+
+# Python compiled files (Speed-up files generated when running .py)
+__pycache__/
+*.pyc
+
+# Large data files
+*.csv
+*.parquet

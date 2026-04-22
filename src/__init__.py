@@ -52,6 +52,10 @@ from .plotting_utils import (
     plot_performance
 )
 
+from .optimization import (
+    run_pca_parameter_sweep
+)
+
 __all__ = [
     "download_raw",
     "load_raw",
@@ -79,5 +83,6 @@ __all__ = [
     "run_full_strategy_pca",
     "plot_correlation_heatmap",
     "plot_correlation_histogram",
-    "plot_performance"
+    "plot_performance",
+    "run_pca_parameter_sweep"
 ]

@@ -40,8 +40,10 @@ from .factor_models import (
 from .strategy_engine import (
     calibrate_tradable_universe,
     simulate_hedged_trading,
+    evaluate_window,
     run_full_strategy,
     simulate_hedged_trading_pca,
+    evaluate_window_pca, 
     run_full_strategy_pca
 )
 
@@ -78,8 +80,10 @@ __all__ = [
     "compute_rolling_split_pca",
     "calibrate_tradable_universe",
     "simulate_hedged_trading",
+    "evaluate_window",
     "run_full_strategy",
     "simulate_hedged_trading_pca",
+    "evaluate_window_pca",
     "run_full_strategy_pca",
     "plot_correlation_heatmap",
     "plot_correlation_histogram",

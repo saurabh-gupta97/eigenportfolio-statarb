@@ -55,7 +55,8 @@ def calibrate_tradable_universe(train_residuals, adf_p_threshold=0.05):
 # ------------------------------------------------------------------------------
 def simulate_hedged_trading(test_stock_returns, test_etf_returns, test_residuals, 
                             ou_parameters, betas_record, t2e_dict, 
-                            entry_threshold=1.25, exit_threshold=0.50):
+                            entry_threshold=1.25, exit_threshold=0.50,
+                            bps_cost=0.0005):
     """Simulates ETF market-neutral bang-bang trading on the test window."""
     pnl_df = pd.DataFrame(0.0, index=test_residuals.index, columns=list(ou_parameters.keys()), dtype=float)
     
@@ -67,6 +68,10 @@ def simulate_hedged_trading(test_stock_returns, test_etf_returns, test_residuals
         etf_list = t2e_dict.get(ticker, [])
         assigned_etf = etf_list[0] if len(etf_list) > 0 else "SPY"
         beta = betas_record.get(ticker, {}).get(assigned_etf, 0.0)
+
+        # Calculate the gross dollar exposure required to put on 1 unit of this spread.
+        # 1.0 (the stock leg) + the absolute value of the ETF weight (the hedge leg)
+        gross_exposure = 1.0 + np.abs(beta)
         
         position = 0 
         
@@ -82,11 +87,15 @@ def simulate_hedged_trading(test_stock_returns, test_etf_returns, test_residuals
             
             X_current = X_prev + residual_return
             s_score = (X_current - m) / sigma_eq
-            
+
+            # 1. Accrue Mark-to-Market PnL from yesterday's position
             if position == 1:
                 pnl_df.at[date, ticker] = (1.0 * stock_ret) - (beta * etf_ret)
             elif position == -1:
                 pnl_df.at[date, ticker] = (-1.0 * stock_ret) + (beta * etf_ret)
+
+            # 2. State Machine: Determine if we need to trade today
+            old_position = position
                 
             if position == 0:
                 if s_score < -entry_threshold:
@@ -99,17 +108,29 @@ def simulate_hedged_trading(test_stock_returns, test_etf_returns, test_residuals
             elif position == -1:
                 if s_score < exit_threshold:
                     position = 0  
-                    
+
+            # 3. Deduct Transaction Costs if a trade occurred
+            if position != old_position:
+                # position_change is usually 1 (entry/exit) or 2 (direct flip from Long to Short)
+                position_change = abs(position - old_position)
+                
+                # Deduct the cost from today's PnL
+                trade_cost = bps_cost * gross_exposure * position_change
+                pnl_df.at[date, ticker] -= trade_cost
+            
             X_prev = X_current
             
     portfolio_daily_pnl = pnl_df.sum(axis=1)
     return portfolio_daily_pnl
 
-
 def simulate_hedged_trading_pca(test_stock_returns, test_residuals, 
                                 ou_parameters, betas_record, F_test,
-                                entry_threshold=1.25, exit_threshold=0.50):
-    """Simulates PCA market-neutral bang-bang trading on the test window."""
+                                entry_threshold=1.25, exit_threshold=0.50,
+                                bps_cost=0.0005): # Default 5 bps friction
+    """
+    Simulates PCA market-neutral bang-bang trading on the test window,
+    incorporating variable transaction costs based on gross spread exposure.
+    """
     pnl_df = pd.DataFrame(0.0, index=test_residuals.index, columns=list(ou_parameters.keys()), dtype=float)
     
     for ticker, params in ou_parameters.items():
@@ -118,6 +139,11 @@ def simulate_hedged_trading_pca(test_stock_returns, test_residuals,
         X_prev = params['X_train_end']
         
         betas = betas_record[ticker]
+        
+        # Calculate the gross dollar exposure required to put on 1 unit of this spread.
+        # 1.0 (the stock leg) + the absolute sum of the factor weights (the hedge leg)
+        gross_exposure = 1.0 + np.sum(np.abs(betas))
+        
         position = 0 
         
         for day_idx, (date, residual_return) in enumerate(test_residuals[ticker].items()):
@@ -125,7 +151,7 @@ def simulate_hedged_trading_pca(test_stock_returns, test_residuals,
             # --- PRODUCTION GUARD CLAUSE ---
             if pd.isna(residual_return):
                 pnl_df.at[date, ticker] = 0.0
-                continue # Path and position freeze for today
+                continue 
                 
             stock_ret = test_stock_returns.at[date, ticker]
             hedge_ret = np.sum(betas * F_test[day_idx, :])
@@ -133,11 +159,15 @@ def simulate_hedged_trading_pca(test_stock_returns, test_residuals,
             X_current = X_prev + residual_return
             s_score = (X_current - m) / sigma_eq
             
+            # 1. Accrue Mark-to-Market PnL from yesterday's position
             if position == 1:
                 pnl_df.at[date, ticker] = stock_ret - hedge_ret
             elif position == -1:
                 pnl_df.at[date, ticker] = -stock_ret + hedge_ret
                 
+            # 2. State Machine: Determine if we need to trade today
+            old_position = position
+            
             if position == 0:
                 if s_score < -entry_threshold:
                     position = 1  
@@ -150,18 +180,29 @@ def simulate_hedged_trading_pca(test_stock_returns, test_residuals,
                 if s_score < exit_threshold:
                     position = 0  
                     
+            # 3. Deduct Transaction Costs if a trade occurred
+            if position != old_position:
+                # position_change is usually 1 (entry/exit) or 2 (direct flip from Long to Short)
+                position_change = abs(position - old_position)
+                
+                # Deduct the cost from today's PnL
+                trade_cost = bps_cost * gross_exposure * position_change
+                pnl_df.at[date, ticker] -= trade_cost
+                    
             X_prev = X_current
             
     portfolio_daily_pnl = pnl_df.sum(axis=1)
     return portfolio_daily_pnl
+
     
 # ------------------------------------------------------------------------------
 # 3. SINGLE WINDOW EVALUATION
 # ------------------------------------------------------------------------------
 def evaluate_window(returns_wide, volume_wide, returns_wide_etf, t2e_dict,
-                        train_start, train_end, test_start, test_end, 
-                        entry_threshold=1.25, exit_threshold=0.50, 
-                        adf_p_threshold=0.05, avg_window=60):
+                    train_start, train_end, test_start, test_end, 
+                    entry_threshold=1.25, exit_threshold=0.50, 
+                    adf_p_threshold=0.05, avg_window=60, 
+                    bps_cost=0.0005):
     """
     The 'Atom' of the ETF backtest. Executes the entire pipeline for a specific 
     train/test date slice and a specific set of hyperparameters.
@@ -210,7 +251,8 @@ def evaluate_window(returns_wide, volume_wide, returns_wide_etf, t2e_dict,
 def evaluate_window_pca(returns_wide, volume_wide, 
                         train_start, train_end, test_start, test_end, 
                         num_factors, entry_threshold, exit_threshold, 
-                        adf_p_threshold=0.05, avg_window=60):
+                        adf_p_threshold=0.05, avg_window=60,
+                        bps_cost=0.0005):
     """
     The 'Atom' of the backtest. Executes the entire pipeline for a specific 
     train/test date slice and a specific set of hyperparameters.
@@ -259,7 +301,8 @@ def evaluate_window_pca(returns_wide, volume_wide,
 # 4. THE MASTER ORCHESTRATORS
 # ------------------------------------------------------------------------------
 def run_full_strategy(returns_wide, volume_wide, returns_wide_etf, t2e_dict, param_grid,
-                          train_days=252, val_days=63, test_days=21):
+                      train_days=252, val_days=63, test_days=21,
+                      bps_cost=0.0005):
     """
     Executes a nested Walk-Forward Optimization for the ETF strategy.
     If no tuning is desired, pass a param_grid with a single combination.
@@ -342,7 +385,8 @@ def run_full_strategy(returns_wide, volume_wide, returns_wide_etf, t2e_dict, par
 
 
 def run_full_strategy_pca(returns_wide, volume_wide, param_grid,
-                                  train_days=252, val_days=63, test_days=21):
+                          train_days=252, val_days=63, test_days=21,
+                          bps_cost=0.0005):
     """
     Executes a nested Walk-Forward Optimization to eliminate in-sample bias.
     val_days (e.g., 63 days / 3 months) is the window used to pick the best params.

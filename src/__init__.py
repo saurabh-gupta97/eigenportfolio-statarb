@@ -47,6 +47,13 @@ from .strategy_engine import (
     run_full_strategy_pca
 )
 
+#Expose statistical analysis
+
+from .statistics import (
+    paired_block_bootstrap,
+    plot_bootstrap_results
+)
+
 # Expose visualization tools
 from .plotting_utils import (
     plot_correlation_heatmap,
@@ -81,6 +88,8 @@ __all__ = [
     "simulate_hedged_trading_pca",
     "evaluate_window_pca",
     "run_full_strategy_pca",
+    "paired_block_bootstrap",
+    "plot_bootstrap_results",
     "plot_correlation_heatmap",
     "plot_correlation_histogram",
     "plot_performance",

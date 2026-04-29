@@ -1,0 +1,184 @@
+ETF Walk-Forward Simulation Complete.
+FINAL OUT-OF-SAMPLE ETF SHARPE: 0.5035
+Performance plot saved to data/results/etf_performance.png
+
+Starting Walk-Forward Optimization (12 param combinations)...
+
+[Validation Phase] Tuning on 2020-01-03 to 2020-04-02
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -0.48)
+[Testing Phase] Executing blindly on 2020-04-03 to 2020-05-04
+
+[Validation Phase] Tuning on 2020-02-04 to 2020-05-04
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 3.86)
+[Testing Phase] Executing blindly on 2020-05-05 to 2020-06-03
+
+[Validation Phase] Tuning on 2020-03-05 to 2020-06-03
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.25, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.28)
+[Testing Phase] Executing blindly on 2020-06-04 to 2020-07-02
+
+[Validation Phase] Tuning on 2020-04-03 to 2020-07-02
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 4.61)
+[Testing Phase] Executing blindly on 2020-07-06 to 2020-08-03
+
+[Validation Phase] Tuning on 2020-05-05 to 2020-08-03
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.25, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 2.91)
+[Testing Phase] Executing blindly on 2020-08-04 to 2020-09-01
+
+[Validation Phase] Tuning on 2020-06-04 to 2020-09-01
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.25, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -2.59)
+[Testing Phase] Executing blindly on 2020-09-02 to 2020-10-01
+
+[Validation Phase] Tuning on 2020-07-06 to 2020-10-01
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.25, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 0.14)
+[Testing Phase] Executing blindly on 2020-10-02 to 2020-10-30
+
+[Validation Phase] Tuning on 2020-08-04 to 2020-10-30
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 2.56)
+[Testing Phase] Executing blindly on 2020-11-02 to 2020-12-01
+
+[Validation Phase] Tuning on 2020-09-02 to 2020-12-01
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.25, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 3.34)
+[Testing Phase] Executing blindly on 2020-12-02 to 2020-12-31
+
+[Validation Phase] Tuning on 2020-10-02 to 2020-12-31
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.25, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 2.08)
+[Testing Phase] Executing blindly on 2021-01-04 to 2021-02-02
+
+[Validation Phase] Tuning on 2020-11-02 to 2021-02-02
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.25, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 2.13)
+[Testing Phase] Executing blindly on 2021-02-03 to 2021-03-04
+
+[Validation Phase] Tuning on 2020-12-02 to 2021-03-04
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.25, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 3.19)
+[Testing Phase] Executing blindly on 2021-03-05 to 2021-04-05
+
+[Validation Phase] Tuning on 2021-01-04 to 2021-04-05
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 4.10)
+[Testing Phase] Executing blindly on 2021-04-06 to 2021-05-04
+
+[Validation Phase] Tuning on 2021-02-03 to 2021-05-04
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 4.70)
+[Testing Phase] Executing blindly on 2021-05-05 to 2021-06-03
+
+[Validation Phase] Tuning on 2021-03-05 to 2021-06-03
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 4.12)
+[Testing Phase] Executing blindly on 2021-06-04 to 2021-07-02
+
+[Validation Phase] Tuning on 2021-04-06 to 2021-07-02
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 3.28)
+[Testing Phase] Executing blindly on 2021-07-06 to 2021-08-03
+
+[Validation Phase] Tuning on 2021-05-05 to 2021-08-03
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 0.08)
+[Testing Phase] Executing blindly on 2021-08-04 to 2021-09-01
+
+[Validation Phase] Tuning on 2021-06-04 to 2021-09-01
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -0.09)
+[Testing Phase] Executing blindly on 2021-09-02 to 2021-10-01
+
+[Validation Phase] Tuning on 2021-07-06 to 2021-10-01
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.18)
+[Testing Phase] Executing blindly on 2021-10-04 to 2021-11-01
+
+[Validation Phase] Tuning on 2021-08-04 to 2021-11-01
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -3.04)
+[Testing Phase] Executing blindly on 2021-11-02 to 2021-12-01
+
+[Validation Phase] Tuning on 2021-09-02 to 2021-12-01
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -1.07)
+[Testing Phase] Executing blindly on 2021-12-02 to 2021-12-31
+
+[Validation Phase] Tuning on 2021-10-04 to 2021-12-31
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -1.07)
+[Testing Phase] Executing blindly on 2022-01-03 to 2022-02-01
+
+[Validation Phase] Tuning on 2021-11-02 to 2022-02-01
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.25, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.31)
+[Testing Phase] Executing blindly on 2022-02-02 to 2022-03-03
+
+[Validation Phase] Tuning on 2021-12-02 to 2022-03-03
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 0.50)
+[Testing Phase] Executing blindly on 2022-03-04 to 2022-04-01
+
+[Validation Phase] Tuning on 2022-01-03 to 2022-04-01
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 0.17)
+[Testing Phase] Executing blindly on 2022-04-04 to 2022-05-03
+
+[Validation Phase] Tuning on 2022-02-02 to 2022-05-03
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -0.05)
+[Testing Phase] Executing blindly on 2022-05-04 to 2022-06-02
+
+[Validation Phase] Tuning on 2022-03-04 to 2022-06-02
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -1.01)
+[Testing Phase] Executing blindly on 2022-06-03 to 2022-07-05
+
+[Validation Phase] Tuning on 2022-04-04 to 2022-07-05
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.25, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.97)
+[Testing Phase] Executing blindly on 2022-07-06 to 2022-08-03
+
+[Validation Phase] Tuning on 2022-05-04 to 2022-08-03
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 4.44)
+[Testing Phase] Executing blindly on 2022-08-04 to 2022-09-01
+
+[Validation Phase] Tuning on 2022-06-03 to 2022-09-01
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.91)
+[Testing Phase] Executing blindly on 2022-09-02 to 2022-10-03
+
+[Validation Phase] Tuning on 2022-07-06 to 2022-10-03
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.25, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.56)
+[Testing Phase] Executing blindly on 2022-10-04 to 2022-11-01
+
+[Validation Phase] Tuning on 2022-08-04 to 2022-11-01
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -0.41)
+[Testing Phase] Executing blindly on 2022-11-02 to 2022-12-01
+
+[Validation Phase] Tuning on 2022-09-02 to 2022-12-01
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.25, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.02)
+[Testing Phase] Executing blindly on 2022-12-02 to 2023-01-03
+
+[Validation Phase] Tuning on 2022-10-04 to 2023-01-03
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -3.30)
+[Testing Phase] Executing blindly on 2023-01-04 to 2023-02-02
+
+[Validation Phase] Tuning on 2022-11-02 to 2023-02-02
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.25, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -0.67)
+[Testing Phase] Executing blindly on 2023-02-03 to 2023-03-06
+
+[Validation Phase] Tuning on 2022-12-02 to 2023-03-06
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 1.29)
+[Testing Phase] Executing blindly on 2023-03-07 to 2023-04-04
+
+[Validation Phase] Tuning on 2023-01-04 to 2023-04-04
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 3.52)
+[Testing Phase] Executing blindly on 2023-04-05 to 2023-05-04
+
+[Validation Phase] Tuning on 2023-02-03 to 2023-05-04
+Selected Best Params: {'num_factors': 5, 'entry_threshold': 1.5, 'exit_threshold': 0.75, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: -1.26)
+[Testing Phase] Executing blindly on 2023-05-05 to 2023-06-05
+
+[Validation Phase] Tuning on 2023-03-07 to 2023-06-05
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 0.24)
+[Testing Phase] Executing blindly on 2023-06-06 to 2023-07-06
+
+[Validation Phase] Tuning on 2023-04-05 to 2023-07-06
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 2.53)
+[Testing Phase] Executing blindly on 2023-07-07 to 2023-08-04
+
+[Validation Phase] Tuning on 2023-05-05 to 2023-08-04
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 4.01)
+[Testing Phase] Executing blindly on 2023-08-07 to 2023-09-05
+
+[Validation Phase] Tuning on 2023-06-06 to 2023-09-05
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 3.60)
+[Testing Phase] Executing blindly on 2023-09-06 to 2023-10-04
+
+[Validation Phase] Tuning on 2023-07-07 to 2023-10-04
+Selected Best Params: {'num_factors': 10, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 3.83)
+[Testing Phase] Executing blindly on 2023-10-05 to 2023-11-02
+
+[Validation Phase] Tuning on 2023-08-07 to 2023-11-02
+Selected Best Params: {'num_factors': 8, 'entry_threshold': 1.5, 'exit_threshold': 0.5, 'adf_p_threshold': 0.05, 'avg_window': 60} (Val Sharpe: 4.16)
+[Testing Phase] Executing blindly on 2023-11-03 to 2023-12-04
+
+Walk-Forward Optimization Complete.
+FINAL OUT-OF-SAMPLE SHARPE: 0.5273

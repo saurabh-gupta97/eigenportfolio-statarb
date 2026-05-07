@@ -48,9 +48,9 @@
 - Observed ΔSharpe ≈ **0.024**
 - Empirical p-value ≈ **0.497**
 
-\[
-\Rightarrow \text{No statistically significant edge}
-\]
+
+--> No statistically significant edge
+
 
 ---
 
@@ -102,9 +102,7 @@ z_t = \frac{x_t - \mu}{\sigma / \sqrt{2\kappa}}
 
 Strict **causal walk-forward pipeline**:
 
-\[
-\text{Train} \rightarrow \text{Validation} \rightarrow \text{Test}
-\]
+Train --> Validation --> Test
 
 Key design decisions:
 
@@ -186,10 +184,7 @@ Result:
   - introduces instability  
 - Net effect: **no robust alpha gain**
 - Confirms:
-  
-\[
-\text{Modern markets} \Rightarrow \text{weak stat-arb signal}
-\]
+Modern markets --> weak stat-arb signal
 
 ---
 
@@ -212,22 +207,25 @@ Result:
 ---
 
 ## 🗂️ Project Structure
+
 src/
-├── data_pipeline.py
-├── factor_models.py
-├── strategy_engine.py
-├── math_utils.py
-├── plotting_utils.py
+-- data_pipeline.py
+-- factor_models.py
+-- strategy_engine.py
+-- math_utils.py
+-- plotting_utils.py
+
 data/
-├── raw/
-├── results/
-    ├── correlation_heatmap.png
-    ├── correlation_histogram.png
-    ├── etf_performance.png
-    ├── pca_performance.png
-    ├── bootstrap_hist.png
+-- raw/
+-- results/
+  -- correlation_heatmap.png
+  -- correlation_histogram.png
+  -- etf_performance.png
+  -- pca_performance.png
+  -- bootstrap_hist.png
+
 notebooks/
-├── strategy_exec.ipynb
+-- strategy_exec.ipynb
 
 ---
 

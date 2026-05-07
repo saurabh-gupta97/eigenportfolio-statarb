@@ -268,6 +268,9 @@ def process_universe_etfs(metadata_path="data/raw/universe_metadata.csv"):
 
     etf_to_tickers = {k: v for k, v in etf_to_tickers.items() if len(v) > 0}
 
+    unique_etfs.append("SPY")
+    print(f"Added SPY to unique sector ETFs: {unique_etfs}")
+
     return metadata, unique_etfs, ticker_to_etfs, etf_to_tickers
 
 def download_prices_etf(etfs, start_date="2019-01-01", end_date="2024-01-01", file_path="data/raw/prices_etf.csv"):

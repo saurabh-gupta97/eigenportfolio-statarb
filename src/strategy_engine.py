@@ -68,10 +68,11 @@ def simulate_hedged_trading(test_stock_returns, test_etf_returns, test_residuals
         etf_list = t2e_dict.get(ticker, [])
         assigned_etf = etf_list[0] if len(etf_list) > 0 else "SPY"
         beta = betas_record.get(ticker, {}).get(assigned_etf, 0.0)
+        beta_market = betas_record.get(ticker, {}).get("SPY", 0.0)
 
         # Calculate the gross dollar exposure required to put on 1 unit of this spread.
         # 1.0 (the stock leg) + the absolute value of the ETF weight (the hedge leg)
-        gross_exposure = 1.0 + np.abs(beta)
+        gross_exposure = 1.0 + np.abs(beta) + np.abs(beta_market)
         
         position = 0 
         
@@ -84,15 +85,16 @@ def simulate_hedged_trading(test_stock_returns, test_etf_returns, test_residuals
                 
             stock_ret = test_stock_returns.at[date, ticker]
             etf_ret = test_etf_returns.at[date, assigned_etf]
+            market_ret = test_etf_returns.at[date, "SPY"]
             
             X_current = X_prev + residual_return
             s_score = (X_current - m) / sigma_eq
 
             # 1. Accrue Mark-to-Market PnL from yesterday's position
             if position == 1:
-                pnl_df.at[date, ticker] = (1.0 * stock_ret) - (beta * etf_ret)
+                pnl_df.at[date, ticker] = (1.0 * stock_ret) - (beta * etf_ret + beta_market * market_ret)
             elif position == -1:
-                pnl_df.at[date, ticker] = (-1.0 * stock_ret) + (beta * etf_ret)
+                pnl_df.at[date, ticker] = (-1.0 * stock_ret) + (beta * etf_ret + beta_market * market_ret)
 
             # 2. State Machine: Determine if we need to trade today
             old_position = position

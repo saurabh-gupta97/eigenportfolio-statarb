@@ -57,24 +57,26 @@ def compute_rolling_split(train_stocks, test_stocks_raw, returns_wide_etf, t2e_d
         # --- TRAIN ---
         y_train = train_stocks[ticker].values
         x_train = train_etfs[assigned_etf].values
+        market_train = train_etfs["SPY"].values
         
-        X_train = np.vstack([np.ones(len(x_train)), x_train]).T
+        X_train = np.vstack([np.ones(len(x_train)), x_train, market_train]).T
         coeffs, _, _, _ = np.linalg.lstsq(X_train, y_train, rcond=None)
-        alpha, beta = coeffs[0], coeffs[1]
+        alpha, beta, beta_market = coeffs[0], coeffs[1], coeffs[2]
         
         # Store beta in a dictionary keyed by ETF name to match the explicit hedger's expectations
-        betas_record[ticker] = {assigned_etf: beta}
-        residuals_train[ticker] = y_train - (alpha + beta * x_train)
+        betas_record[ticker] = {assigned_etf: beta, "SPY": beta_market}
+        residuals_train[ticker] = y_train - (alpha + beta * x_train + beta_market * market_train)
         
         # --- TEST (Out of Sample) ---
         # We only process the test data if the stock actually exists in the raw test dataframe
         if ticker in test_stocks_raw.columns:
             y_test = test_stocks_raw[ticker].values
             x_test = test_etfs[assigned_etf].values
+            market_test = test_etfs["SPY"].values
             
             # If the stock halted and y_test is NaN, the math becomes: NaN - float = NaN.
             # This perfectly flags it for the simulator's guard clause.
-            residuals_test[ticker] = y_test - (alpha + beta * x_test)
+            residuals_test[ticker] = y_test - (alpha + beta * x_test + beta_market * market_test)
             
     return residuals_train, residuals_test, betas_record
 
